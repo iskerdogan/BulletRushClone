@@ -20,6 +20,17 @@ public class PlayerController : MyCharacterController
         }
     }
 
+    private void OnTriggerEnter(Collider other) 
+    {
+        var enemy= other.transform.GetComponent<EnemyController>();
+        if (enemy != null)
+        {
+            var direction = other.transform.position - transform.position;
+            direction.y = 0;
+            direction = direction.normalized;
+            ShootController.Instance.Shoot(direction,transform.position);
+        }    
+    }
     private void Dead()
     {
         Debug.Log("dead");

@@ -15,4 +15,14 @@ public class EnemyController : MyCharacterController
         transform.LookAt(player.transform);
     }
 
+    private void OnTriggerEnter(Collider other) 
+    {
+        var bullet = other.transform.GetComponent<BulletController>();
+        if (bullet != null)
+        {
+            gameObject.SetActive(false);
+            other.gameObject.SetActive(false);
+        }    
+    }
+
 }
