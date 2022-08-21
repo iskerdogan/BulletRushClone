@@ -5,8 +5,14 @@ using Utilities;
 
 public class PlayerController : MyCharacterController
 {
+    private int enemyCount;
     private bool isShooting;
     private List<Transform> enemies = new List<Transform>();
+
+    private void Start() 
+    {
+        enemyCount = FindObjectsOfType<EnemyController>().Length;
+    }
 
     private void Update()
     {
@@ -77,5 +83,15 @@ public class PlayerController : MyCharacterController
     {
         Debug.Log("dead");
         Time.timeScale = 0;
+    }
+    public void Win()
+    {
+        Debug.Log("Win");
+        Time.timeScale = 0;
+        var current = FindObjectsOfType<EnemyController>().Length;
+        var result = current / (float)enemyCount;
+        var success = Mathf.Lerp(100,0,result);
+        Debug.Log("Completed = %"+success);
+
     }
 }
